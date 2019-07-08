@@ -1,19 +1,12 @@
-import { NumbersCollection } from './NumbersCollection'
-import { sortable } from './interface/sortable'
-
-export class Sorter {
-  private _collection: sortable
-  
-  constructor (collection: sortable) {
-    this._collection = collection
-  }
-
+export abstract class Sorter {
+  abstract length: number
+  abstract compare(leftIndex: number, rightIndex: number): boolean
+  abstract swap(leftIndex: number, rightIndex: number): void
   sort(): void {
-    const { length } = this._collection
     for (let i = 0; i < length; i++) {
       for (let j = 0; j < (length -i -1); j++) {
-        if (this._collection.compare(j, j+1)) {
-          this._collection.swap(j, j+1)
+        if (this.compare(j, j+1)) {
+          this.swap(j, j+1)
         }
       }
     }
